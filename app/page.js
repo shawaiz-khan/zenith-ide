@@ -1,10 +1,10 @@
+import EditorComponent from "@/components/EditorComponent";
 import { ModeToggle } from "@/components/theme-toggle";
-import Image from "next/image";
 
 export default function Home() {
   return (
-    <div>
-      <ModeToggle />
+    <div className="dark:bg-slate-800 bg-slate-300 p-8">
+      <EditorComponent />
     </div>
   );
 }
