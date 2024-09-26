@@ -8,8 +8,12 @@ import {
     ResizablePanel,
     ResizablePanelGroup,
   } from "@/components/ui/resizable"
+import { useTheme } from "next-themes";
 
 export default function EditorComponent () {
+
+    const { theme } = useTheme();
+
     return (
         <div className="min-h-screen dark:bg-slate-900 rounded-2xl shadow-2xl py-6 px-8">
             <div className="flex items-center justify-between pb-3">
@@ -28,7 +32,7 @@ export default function EditorComponent () {
                     className="w-full rounded-lg border md:min-w-[450px]"
                     >
                     <ResizablePanel minSize={35} defaultSize={50}>
-                    <Editor height="90vh" defaultLanguage="javascript" defaultValue="// some comment" />
+                    <Editor theme={theme === "dark" ? "vs-dark" : "vs-light"} height="90vh" defaultLanguage="javascript" defaultValue="// some comment" />
                     </ResizablePanel>
                     <ResizableHandle withHandle/>
                     <ResizablePanel minSize={35} defaultSize={50}>
