@@ -26,13 +26,13 @@ export default function EditorComponent () {
                     direction="horizontal"
                     className="w-full rounded-lg border md:min-w-[450px]"
                     >
-                    <ResizablePanel defaultSize={50}>
+                    <ResizablePanel minSize={35} defaultSize={50}>
                         <div className="flex h-[200px] items-center justify-center p-6">
                         <span className="font-semibold">One</span>
                         </div>
                     </ResizablePanel>
                     <ResizableHandle withHandle/>
-                    <ResizablePanel defaultSize={50}>
+                    <ResizablePanel minSize={35} defaultSize={50}>
                         <ResizablePanelGroup direction="vertical">
                         <ResizablePanel defaultSize={25}>
                             <div className="flex h-full items-center justify-center p-6">
