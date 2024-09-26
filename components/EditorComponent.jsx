@@ -2,6 +2,7 @@
 import React from "react";
 import { ModeToggle } from "./theme-toggle";
 import SelectLanguage from "./SelectLanguage";
+import Editor from '@monaco-editor/react';
 import {
     ResizableHandle,
     ResizablePanel,
@@ -27,9 +28,7 @@ export default function EditorComponent () {
                     className="w-full rounded-lg border md:min-w-[450px]"
                     >
                     <ResizablePanel minSize={35} defaultSize={50}>
-                        <div className="flex h-[200px] items-center justify-center p-6">
-                        <span className="font-semibold">One</span>
-                        </div>
+                    <Editor height="90vh" defaultLanguage="javascript" defaultValue="// some comment" />
                     </ResizablePanel>
                     <ResizableHandle withHandle/>
                     <ResizablePanel minSize={35} defaultSize={50}>
