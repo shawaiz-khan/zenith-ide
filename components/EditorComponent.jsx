@@ -44,7 +44,8 @@ export default function EditorComponent () {
                                 <div className="flex items-center justify-between bg-slate-400 dark:bg-slate-950 px-6 py-2">
                                     <h2>Output</h2>
                                     <Button size={"sm"} className="dark:bg-purple-600 dark:hover:bg-purple-700 text-slate-100 bg-slate-800 hover:bg-slate-900">
-                                        <Play className="w-4 h-4 mr-2"/><span>Run</span>
+                                        <Play className="w-4 h-4 mr-2"/>
+                                        <span>Run</span>
                                     </Button>
                                 </div>
                                 <div className="px-6">
