@@ -101,9 +101,13 @@ export default function EditorComponent() {
                         <ResizablePanel minSize={35} defaultSize={50}>
                             <div>
                                 <div className="flex items-center justify-between bg-slate-400 dark:bg-slate-950 px-6 py-2">
+                                    <h1 htmlFor="file-upload">
+                                        Upload File:
+                                    </h1>
                                     <input
+                                        id="file-upload"
                                         type="file"
-                                        className="cursor-pointer bg-white text-sm text-slate-700 file:mr-4 file:py-1 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                                        className="cursor-pointer text-sm dark:text-gray-200 text-slate-800 bg-slate-200 dark:bg-slate-700 rounded-lg border border-slate-300 dark:border-slate-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent p-[10px]"
                                         onChange={handleFileUpload}
                                     />
                                 </div>
