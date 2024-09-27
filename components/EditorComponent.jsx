@@ -77,7 +77,6 @@ export default function EditorComponent() {
         if (matchedLanguage) {
             console.log('Matched language:', matchedLanguage);
             setLanguageOption(matchedLanguage);
-            setSourceCode(initialCodeSnippets[matchedLanguage.language] || '');
         } else {
             console.warn('Unsupported file type');
             alert('Unsupported file type. Please upload a valid file.');
