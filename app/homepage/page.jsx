@@ -22,7 +22,17 @@ export default function Homepage() {
         }
 
         //Redirect
-        router.push('/about');
+        router.push(`/editor/${roomId}`, {
+            state: {
+                username,
+            }
+        });
+    }
+
+    const handleInputEnter = (e) => {
+        if (e.code=='Enter') {
+            joinRoom();
+        }
     }
 
     return (
@@ -34,6 +44,7 @@ export default function Homepage() {
                     placeholder='ROOM ID'
                     onChange={(e) => setRoomId(e.target.value)}
                     value={roomId}
+                    onKeyUp={handleInputEnter}
                 />
                 <input 
                     type='text'
@@ -41,6 +52,7 @@ export default function Homepage() {
                     placeholder='USERNAME'
                     onChange={(e) => setUsername(e.target.value)}
                     value={username}
+                    onKeyUp={handleInputEnter}
                 />
                 <button 
                     className='joinButton'
