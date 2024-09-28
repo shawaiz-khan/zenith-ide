@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidV4 } from 'uuid';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 export default function Homepage() {
     const router = useRouter();
@@ -22,7 +22,7 @@ export default function Homepage() {
         }
 
         //Redirect
-
+        router.push('/about');
     }
 
     return (
