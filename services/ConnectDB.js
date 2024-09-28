@@ -4,7 +4,7 @@ const user = process.env.MONGODB_USER;
 const password = process.env.MONGODB_PASS;
 const cluster = process.env.MONGODB_CLUSTER;
 
-const uri = `mongodb+srv://${user}:${password}@${cluster}.cbrsy.mongodb.net/?retryWrites=true&w=majority&appName=${cluster}`
+const uri = `mongodb+srv://${user}:${password}@${cluster}.a3ffs.mongodb.net/?retryWrites=true&w=majority&appName=${cluster}`
 
 // check if uri is empty
 if (!uri) {
