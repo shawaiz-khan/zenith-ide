@@ -71,16 +71,27 @@ export default function EditorComponent() {
 
     function setLanguageFromFile(fileName) {
         const extension = fileName.split('.').pop().toLowerCase();
-        console.log('Uploaded file extension:', extension);
-        const matchedLanguage = supportedLanguages.find(lang => lang.aliases.includes(extension));
+        const matchedLanguage = supportedLanguages.find(lang => lang.extensions.includes(`.${extension}`));
 
         if (matchedLanguage) {
-            console.log('Matched language:', matchedLanguage);
             setLanguageOption(matchedLanguage);
         } else {
             console.warn('Unsupported file type');
             alert('Unsupported file type. Please upload a valid file.');
         }
+    }
+
+    function downloadCode() {
+        const blob = new Blob([sourceCode], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const extension = languageOption.extensions[0] || '.txt'; // Fallback to .txt if no extension is found
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `source_code${extension}`; // Use the first extension found for the language
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
     }
 
     return (
@@ -102,7 +113,7 @@ export default function EditorComponent() {
                             <div>
                                 <div className="flex items-center justify-between bg-slate-400 dark:bg-slate-950 px-6 py-[10px]">
                                     <h1 htmlFor="file-upload">
-                                        Upload File:
+                                        Upload:
                                     </h1>
                                     <input
                                         id="file-upload"
@@ -110,6 +121,12 @@ export default function EditorComponent() {
                                         className="cursor-pointer text-sm dark:text-gray-200 text-slate-800 bg-slate-200 dark:bg-slate-700 rounded-lg border border-slate-300 dark:border-slate-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent p-2"
                                         onChange={handleFileUpload}
                                     />
+                                    <button
+                                        onClick={downloadCode}
+                                        className="cursor-pointer text-sm dark:bg-purple-600 dark:hover:bg-purple-700 text-slate-100 bg-slate-800 hover:bg-slate-900 p-3 rounded-md"
+                                    >
+                                        Download Code
+                                    </button>
                                 </div>
                                 <Editor
                                     theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
