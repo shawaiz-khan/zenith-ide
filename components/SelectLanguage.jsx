@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, Fragment } from 'react'
+import { Fragment } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
-import { supportedLanguages } from '@/constants/languages' // Import your supported languages
+import { supportedLanguages } from '@/constants/languages'
 
 // Utility function for conditionally applying class names
 function classNames(...classes) {
@@ -19,6 +19,10 @@ export default function SelectLanguage({onSelect, selectedLanguageOption}) {
           <div className="relative">
             <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-2 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
               <span className="flex items-center">
+                <selectedLanguageOption.icon
+                  className="h-5 w-5"
+                  style={{ color: selectedLanguageOption.color }} 
+                />
                 <span className="ml-3 block truncate capitalize">
                   {selectedLanguageOption.language} ({selectedLanguageOption.version})
                 </span>
@@ -51,6 +55,10 @@ export default function SelectLanguage({onSelect, selectedLanguageOption}) {
                     {({ selected, active }) => (
                       <>
                         <div className="flex items-center">
+                        <language.icon
+                              className="h-5 w-5"
+                              style={{ color: language.color }} 
+                            />
                           <span
                             className={classNames(
                               selected ? 'font-semibold' : 'font-normal',

@@ -1,64 +1,90 @@
+import { SiJavascript, SiTypescript, SiPhp, SiPython, SiRuby, SiRust, SiCsharp, SiCplusplus, SiGo, SiC } from 'react-icons/si';
+import { DiJava } from 'react-icons/di';
+
 export const supportedLanguages = [
   {
     language: "javascript",
     version: "18.15.0",
     aliases: ["nodejs", "js", "node-javascript", "js", 'javascript'],
     runtime: "node",
+    icon: SiJavascript,
+    color: "#f7df1e", 
   },
   {
     language: "typescript",
     version: "5.0.3",
     aliases: ["ts", "typescript", "ts", "tsx"],
+    icon: SiTypescript,
+    color: "#007acc", 
   },
   {
     language: "php",
     version: "8.2.3",
     aliases: ["php"],
+    icon: SiPhp,
+    color: "#8993be", 
   },
   {
     language: "python",
     version: "3.10.0",
     aliases: ["py", "python3"],
+    icon: SiPython,
+    color: "#3776ab", 
   },
   {
     language: "ruby",
     version: "3.0.1",
     aliases: ["rb", "ruby"],
+    icon: SiRuby,
+    color: "#cc342d", 
   },
   {
     language: "rust",
     version: "1.68.2",
     aliases: ["rs", "rust"],
+    icon: SiRust,
+    color: "#dea584", 
   },
   {
-    language: "csharp",
+    language: "c#",
     version: "6.12.0",
     aliases: ["c#", "cs"],
     runtime: "mono",
+    icon: SiCsharp,
+    color: "#178600", 
   },
   {
-    language: "cpp",
+    language: "c++",
     version: "10.2.0",
     aliases: ["c++", "g++", "cpp"],
     runtime: "gcc",
+    icon: SiCplusplus,
+    color: "#00599c", 
   },
   {
     language: "go",
     version: "1.16.2",
     aliases: ["golang", "go"],
+    icon: SiGo,
+    color: "#00add8", 
   },
   {
     language: "java",
     version: "15.0.2",
     aliases: ["java"],
+    icon: DiJava,
+    color: "#007396", 
   },
   {
     language: "c",
     version: "10.2.0",
     aliases: ["gcc", "c"],
     runtime: "gcc",
+    icon: SiC,
+    color: "#00599c", 
   },
 ];
+
 
 export const initialCodeSnippets = {
   javascript: `function add(a, b) {
