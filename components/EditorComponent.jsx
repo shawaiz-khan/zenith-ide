@@ -1,8 +1,9 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ModeToggle } from './theme-toggle';
 import SelectLanguage from './SelectLanguage';
 import Editor from '@monaco-editor/react';
+import io from 'socket.io-client';
 import {
     ResizableHandle,
     ResizablePanel,
@@ -14,6 +15,8 @@ import { Play, Loader, TriangleAlert } from 'lucide-react';
 import { compileCode } from '@/services/CompileCode';
 import { initialCodeSnippets, supportedLanguages } from '@/constants/languages';
 
+const socket = io('https://zenith-ide-backend.onrender.com');
+
 export default function EditorComponent() {
     const { theme } = useTheme();
     const [sourceCode, setSourceCode] = useState(initialCodeSnippets['javascript']);
@@ -22,10 +25,19 @@ export default function EditorComponent() {
     const [output, setOutput] = useState([]);
     const [err, setErr] = useState(false);
 
-    function handleOnchange(value) {
-        if (value) {
-            setSourceCode(value);
-        }
+    useEffect(() => {
+        socket.on('message2', (newCode) => {
+            setSourceCode(newCode);
+        });
+  
+        return () => {
+            socket.off('message2');
+        };
+    }, []);
+
+    function handleOnchange(newValue) {
+        setSourceCode(newValue); 
+        socket.emit('message1', newValue);
     }
 
     function onSelect(value) {

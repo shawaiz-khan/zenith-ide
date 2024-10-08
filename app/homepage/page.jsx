@@ -59,6 +59,7 @@ export default function Homepage() {
                     onClick={joinRoom}>
                     Join
                 </button>
+                <br></br>
                 <span className='createInfo'>
                     If you dont have an invite then create
                     <a 
