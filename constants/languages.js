@@ -8,6 +8,7 @@ export const supportedLanguages = [
     aliases: ["nodejs", "js", "node-javascript", "js", 'javascript'],
     runtime: "node",
     icon: SiJavascript,
+    extension: "js",
     color: "#f7df1e", 
   },
   {
@@ -15,6 +16,7 @@ export const supportedLanguages = [
     version: "5.0.3",
     aliases: ["ts", "typescript", "ts", "tsx"],
     icon: SiTypescript,
+    extension: "ts",
     color: "#007acc", 
   },
   {
@@ -22,6 +24,7 @@ export const supportedLanguages = [
     version: "8.2.3",
     aliases: ["php"],
     icon: SiPhp,
+    extension: "php",
     color: "#8993be", 
   },
   {
@@ -29,6 +32,7 @@ export const supportedLanguages = [
     version: "3.10.0",
     aliases: ["py", "python3"],
     icon: SiPython,
+    extension: "py",
     color: "#3776ab", 
   },
   {
@@ -36,6 +40,7 @@ export const supportedLanguages = [
     version: "3.0.1",
     aliases: ["rb", "ruby"],
     icon: SiRuby,
+    extension: "rb",
     color: "#cc342d", 
   },
   {
@@ -43,6 +48,7 @@ export const supportedLanguages = [
     version: "1.68.2",
     aliases: ["rs", "rust"],
     icon: SiRust,
+    extension: "rs",
     color: "#dea584", 
   },
   {
@@ -51,6 +57,7 @@ export const supportedLanguages = [
     aliases: ["c#", "cs"],
     runtime: "mono",
     icon: SiCsharp,
+    extension: "cs",
     color: "#178600", 
   },
   {
@@ -59,6 +66,7 @@ export const supportedLanguages = [
     aliases: ["c++", "g++", "cpp"],
     runtime: "gcc",
     icon: SiCplusplus,
+    extension: "cpp",
     color: "#00599c", 
   },
   {
@@ -66,6 +74,7 @@ export const supportedLanguages = [
     version: "1.16.2",
     aliases: ["golang", "go"],
     icon: SiGo,
+    extension: "go",
     color: "#00add8", 
   },
   {
@@ -73,6 +82,7 @@ export const supportedLanguages = [
     version: "15.0.2",
     aliases: ["java"],
     icon: DiJava,
+    extension: "java",
     color: "#007396", 
   },
   {
@@ -81,6 +91,7 @@ export const supportedLanguages = [
     aliases: ["gcc", "c"],
     runtime: "gcc",
     icon: SiC,
+    extension: "c",
     color: "#00599c", 
   },
 ];

@@ -81,6 +81,18 @@ export default function EditorComponent() {
         }
     }
 
+    function handleFileDownload() {
+        const blob = new Blob([sourceCode], { type: 'text/plain' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `code.${languageOption.extension}`; // dynamic file extension
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+    }
+
     function setLanguageFromFile(fileName) {
         const extension = fileName.split('.').pop().toLowerCase();
         console.log('Uploaded file extension:', extension);
@@ -160,7 +172,15 @@ export default function EditorComponent() {
                                                     <Play className="w-4 h-4 mr-2 " />
                                                     <span>Run</span>
                                                 </Button>
+                                                
                                             )}
+                                            <Button
+                                                size={'sm'}
+                                                className="flex p-3 rounded-lg items-center dark:bg-purple-600 dark:hover:bg-purple-700 text-slate-100 bg-slate-800 hover:bg-slate-900"
+                                                onClick={handleFileDownload}
+                                            >
+                                                <span>Download</span>
+                                            </Button>
                                         </div>
 
                                         <div className="px-6 space-y-2">
