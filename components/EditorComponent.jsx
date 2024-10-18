@@ -1,8 +1,9 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ModeToggle } from './theme-toggle';
 import SelectLanguage from './SelectLanguage';
 import Editor from '@monaco-editor/react';
+import io from 'socket.io-client';
 import {
     ResizableHandle,
     ResizablePanel,
@@ -14,6 +15,8 @@ import { Play, Loader, TriangleAlert } from 'lucide-react';
 import { compileCode } from '@/services/CompileCode';
 import { initialCodeSnippets, supportedLanguages } from '@/constants/languages';
 
+const socket = io('https://zenith-ide-backend.onrender.com');
+
 export default function EditorComponent() {
     const { theme } = useTheme();
     const [sourceCode, setSourceCode] = useState(initialCodeSnippets['javascript']);
@@ -22,10 +25,19 @@ export default function EditorComponent() {
     const [output, setOutput] = useState([]);
     const [err, setErr] = useState(false);
 
-    function handleOnchange(value) {
-        if (value) {
-            setSourceCode(value);
-        }
+    useEffect(() => {
+        socket.on('message2', (newCode) => {
+            setSourceCode(newCode);
+        });
+  
+        return () => {
+            socket.off('message2');
+        };
+    }, []);
+
+    function handleOnchange(newValue) {
+        setSourceCode(newValue); 
+        socket.emit('message1', newValue);
     }
 
     function onSelect(value) {
@@ -67,6 +79,18 @@ export default function EditorComponent() {
             };
             reader.readAsText(file);
         }
+    }
+
+    function handleFileDownload() {
+        const blob = new Blob([sourceCode], { type: 'text/plain' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `code.${languageOption.extension}`; // dynamic file extension
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
     }
 
     function setLanguageFromFile(fileName) {
@@ -165,7 +189,15 @@ export default function EditorComponent() {
                                                     <Play className="w-4 h-4 mr-2 " />
                                                     <span>Run</span>
                                                 </Button>
+                                                
                                             )}
+                                            <Button
+                                                size={'sm'}
+                                                className="flex p-3 rounded-lg items-center dark:bg-purple-600 dark:hover:bg-purple-700 text-slate-100 bg-slate-800 hover:bg-slate-900"
+                                                onClick={handleFileDownload}
+                                            >
+                                                <span>Download</span>
+                                            </Button>
                                         </div>
 
                                         <div className="px-6 space-y-2">
