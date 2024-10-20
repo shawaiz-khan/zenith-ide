@@ -29,14 +29,14 @@ export default function EditorComponent() {
         socket.on('message2', (newCode) => {
             setSourceCode(newCode);
         });
-  
+
         return () => {
             socket.off('message2');
         };
     }, []);
 
     function handleOnchange(newValue) {
-        setSourceCode(newValue); 
+        setSourceCode(newValue);
         socket.emit('message1', newValue);
     }
 
@@ -95,11 +95,9 @@ export default function EditorComponent() {
 
     function setLanguageFromFile(fileName) {
         const extension = fileName.split('.').pop().toLowerCase();
-        console.log('Uploaded file extension:', extension);
-        const matchedLanguage = supportedLanguages.find(lang => lang.aliases.includes(extension));
+        const matchedLanguage = supportedLanguages.find(lang => lang.extensions.includes(`.${extension}`));
 
         if (matchedLanguage) {
-            console.log('Matched language:', matchedLanguage);
             setLanguageOption(matchedLanguage);
         } else {
             console.warn('Unsupported file type');
@@ -124,14 +122,14 @@ export default function EditorComponent() {
                     <ResizablePanelGroup direction="horizontal" className="w-full rounded-lg border dark:bg-slate-900">
                         <ResizablePanel minSize={35} defaultSize={50}>
                             <div>
-                                <div className="flex items-center justify-between bg-slate-400 dark:bg-slate-950 px-6 py-[10px]">
+                                <div className="flex gap-3 items-center justify-between bg-slate-400 dark:bg-slate-950 px-6 py-[10px]">
                                     <h1 htmlFor="file-upload">
-                                        Upload File:
+                                        Upload:
                                     </h1>
                                     <input
                                         id="file-upload"
                                         type="file"
-                                        className="cursor-pointer text-sm dark:text-gray-200 text-slate-800 bg-slate-200 dark:bg-slate-700 rounded-lg border border-slate-300 dark:border-slate-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent p-2"
+                                        className="cursor-pointer w-full text-sm dark:text-gray-200 text-slate-800 bg-slate-200 dark:bg-slate-700 rounded-lg border border-slate-300 dark:border-slate-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent p-2"
                                         onChange={handleFileUpload}
                                     />
                                 </div>
@@ -154,33 +152,35 @@ export default function EditorComponent() {
                                     <div className="space-y-3 bg-slate-300 dark:bg-slate-900 min-h-screen">
                                         <div className="flex items-center justify-between bg-slate-400 dark:bg-slate-950 px-6 py-2">
                                             <h2>Output</h2>
-                                            {loading ? (
+                                            <div className='flex gap-3'>
+                                                {loading ? (
+                                                    <Button
+                                                        disabled
+                                                        size={'sm'}
+                                                        className="flex p-3 rounded-lg items-center dark:bg-gray-800 dark:hover:bg-gray-900 text-slate-100 bg-slate-800 hover:bg-slate-900"
+                                                    >
+                                                        <Loader className="w-4 h-4 mr-2 animate-spin" />
+                                                        <span>Running please wait...</span>
+                                                    </Button>
+                                                ) : (
+                                                    <Button
+                                                        onClick={executeCode}
+                                                        size={'sm'}
+                                                        className="flex p-3 rounded-lg items-center dark:bg-gray-800 dark:hover:bg-gray-900 text-slate-100 bg-slate-800 hover:bg-slate-900"
+                                                    >
+                                                        <Play className="w-4 h-4 mr-2 " />
+                                                        <span>Run</span>
+                                                    </Button>
+
+                                                )}
                                                 <Button
-                                                    disabled
                                                     size={'sm'}
-                                                    className="flex p-3 rounded-lg items-center dark:bg-purple-600 dark:hover:bg-purple-700 text-slate-100 bg-slate-800 hover:bg-slate-900"
+                                                    className="flex p-3 rounded-lg items-center dark:bg-gray-800 dark:hover:bg-gray-900 text-slate-100 bg-slate-800 hover:bg-slate-900"
+                                                    onClick={handleFileDownload}
                                                 >
-                                                    <Loader className="w-4 h-4 mr-2 animate-spin" />
-                                                    <span>Running please wait...</span>
+                                                    <span>Download</span>
                                                 </Button>
-                                            ) : (
-                                                <Button
-                                                    onClick={executeCode}
-                                                    size={'sm'}
-                                                    className="flex p-3 rounded-lg items-center dark:bg-purple-600 dark:hover:bg-purple-700 text-slate-100 bg-slate-800 hover:bg-slate-900"
-                                                >
-                                                    <Play className="w-4 h-4 mr-2 " />
-                                                    <span>Run</span>
-                                                </Button>
-                                                
-                                            )}
-                                            <Button
-                                                size={'sm'}
-                                                className="flex p-3 rounded-lg items-center dark:bg-purple-600 dark:hover:bg-purple-700 text-slate-100 bg-slate-800 hover:bg-slate-900"
-                                                onClick={handleFileDownload}
-                                            >
-                                                <span>Download</span>
-                                            </Button>
+                                            </div>
                                         </div>
 
                                         <div className="px-6 space-y-2">

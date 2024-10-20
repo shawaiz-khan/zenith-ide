@@ -5,7 +5,7 @@ export const supportedLanguages = [
   {
     language: "javascript",
     version: "18.15.0",
-    aliases: ["nodejs", "js", "node-javascript", "js", 'javascript'],
+    aliases: ["nodejs", "js", "node-javascript", "javascript"],
     runtime: "node",
     icon: SiJavascript,
     extension: "js",
